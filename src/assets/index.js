@@ -19,7 +19,7 @@ export const images = {
     room1: room1,
     room2: room2,
     room3: room3,
-    room4: room3,
+    room4: room4,
     img1: img1,
     img2: img2,
     img3: img3,

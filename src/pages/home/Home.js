@@ -1,10 +1,16 @@
 import React from 'react'
+import { Hero, HeroBanner } from '../../components'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
-    <div>
-      home
-    </div>
+    <Hero >
+      <HeroBanner title="luxurious rooms" subtitle="deluxe rooms starting at $299" >
+        <Link to="/rooms" className='btn-primary'>
+          our rooms
+        </Link>
+      </HeroBanner>
+    </Hero>
   )
 }
 

@@ -1,6 +1,13 @@
 @use "./variables" as *;
 
 
+@mixin flexCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 // media queries mixins
 @mixin sm-mobile{
     @media screen and (min-width: $sm-mobile-screen) {

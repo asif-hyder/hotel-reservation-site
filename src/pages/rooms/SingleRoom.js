@@ -1,10 +1,9 @@
 import React from 'react'
+import { Hero } from '../../components'
 
 const SingleRoom = () => {
   return (
-    <div>
-      signle room
-    </div>
+    <Hero heroClass='roomsHero'></Hero>
   )
 }
 

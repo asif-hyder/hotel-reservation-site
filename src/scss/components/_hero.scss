@@ -1,0 +1,15 @@
+@use "../abstracts" as *;
+
+
+.defaultHero {
+    min-height: calc(100vh - 66px);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+   @include flexCenter;
+}
+
+.roomsHero {
+    @extend .defaultHero;
+    min-height: 60vh;
+}

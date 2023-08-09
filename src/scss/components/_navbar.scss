@@ -54,31 +54,31 @@
         height: 100px;
     }
 
-    @include lg-mobile {
-        .nav {
-            &__header {
-                &-btn {
-                    display: none;
-                }
+}
+
+@include lg-mobile {
+    .nav {
+        &__header {
+            &-btn {
+                display: none;
             }
+        }
 
-            &__center {
-                max-width: 80%;
-                margin: 0 auto;
-                display: flex;
-            }
+        &__center {
+            max-width: 80%;
+            margin: 0 auto;
+            display: flex;
+        }
 
-            &__links {
-                height: auto;
-                display: flex;
-                margin-left: 4rem;
+        &__links {
+            height: auto;
+            display: flex;
+            margin-left: 4rem;
 
-                & a {
-                    margin: 0 1rem;
-                    padding: 0.5rem 0;
-                }
+            & a {
+                margin: 0 1rem;
+                padding: 0.5rem 0;
             }
         }
     }
-
 }

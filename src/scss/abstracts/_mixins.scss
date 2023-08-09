@@ -1,0 +1,27 @@
+@use "./variables" as *;
+
+
+// media queries mixins
+@mixin sm-mobile{
+    @media screen and (min-width: $sm-mobile-screen) {
+        @content
+    }
+};
+
+@mixin lg-mobile{
+    @media screen and (min-width: $lg-mobile-screen) {
+        @content
+    }
+};
+
+@mixin medium-screen{
+    @media screen and (min-width: $medium-screen) {
+        @content
+    }
+};
+
+@mixin lg-screen{
+    @media screen and (min-width: $large-screen) {
+        @content
+    }
+};

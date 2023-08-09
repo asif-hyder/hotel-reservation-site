@@ -1,0 +1,84 @@
+@use "../abstracts" as *;
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.75rem 2rem;
+    background: $offWhite;
+    z-index: 1;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+
+        &-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            outline: none;
+
+            &-icon {
+                font-size: 1.5rem;
+                color: $primaryColor;
+            }
+        }
+    }
+
+    &__links {
+        height: 0;
+        overflow: hidden;
+        transition: $mainTransition;
+        list-style-type: none;
+
+        & a {
+            display: block;
+            text-decoration: none;
+            text-transform: capitalize;
+            padding: 1rem 0;
+            color: $mainBlack;
+            transition: $mainTransition;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: $mainSpacing;
+
+            &:hover {
+                color: $primaryColor;
+            }
+        }
+    }
+
+    &__links.show-nav {
+        height: 100px;
+    }
+
+    @include lg-mobile {
+        .nav {
+            &__header {
+                &-btn {
+                    display: none;
+                }
+            }
+
+            &__center {
+                max-width: 80%;
+                margin: 0 auto;
+                display: flex;
+            }
+
+            &__links {
+                height: auto;
+                display: flex;
+                margin-left: 4rem;
+
+                & a {
+                    margin: 0 1rem;
+                    padding: 0.5rem 0;
+                }
+            }
+        }
+    }
+
+}

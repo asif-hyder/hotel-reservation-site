@@ -1,3 +1,4 @@
+import logo from "./images/logo.svg"
 import room1 from "./images/details-1.jpeg";
 import room2 from "./images/details-2.jpeg";
 import room3 from "./images/details-3.jpeg";
@@ -16,6 +17,7 @@ import img11 from "./images/room-11.jpeg";
 import img12 from "./images/room-12.jpeg";
 
 export const images = {
+    logo: logo,
     room1: room1,
     room2: room2,
     room3: room3,

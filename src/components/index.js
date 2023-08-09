@@ -1,3 +1,5 @@
 export {default as Navbar} from "./navbar/Navbar"
 export {default as Hero} from "./hero/Hero"
 export {default as HeroBanner} from "./hero/HeroBanner"
+export {default as SectionTilte} from "./utils/SectionTitle"
+export {default as Services} from "./services/Services"

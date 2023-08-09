@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import "./sass/main.sass"
+import "./scss/main.scss"
 import {ErrorPage, Home, Rooms, SingleRoom} from "./pages"
 
 function App() {

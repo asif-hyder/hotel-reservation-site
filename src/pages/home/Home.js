@@ -1,5 +1,5 @@
 import React from 'react'
-import { Hero, HeroBanner, Services } from '../../components'
+import { FeatureRoom, Hero, HeroBanner, Services } from '../../components'
 import { Link } from 'react-router-dom'
 
 const Home = () => {
@@ -13,6 +13,7 @@ const Home = () => {
       </HeroBanner>
     </Hero>
     <Services/> 
+    <FeatureRoom />
     </>
   )
 }

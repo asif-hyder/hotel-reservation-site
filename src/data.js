@@ -1,5 +1,5 @@
 import { images } from "./assets";
-export default [
+const items = [
   {
     sys: {
       id: "1"
@@ -742,3 +742,5 @@ export default [
     }
   }
 ];
+
+export default items

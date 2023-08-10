@@ -1,6 +1,7 @@
 import React from 'react'
 import { images } from '../../assets'
 import { Link } from 'react-router-dom'
+// import PropTypes from "prop-types"
 
 const defaultImg  = images.room1
 const RoomCard = ({room : {name, slug,images,price}}) => {
@@ -22,3 +23,10 @@ const RoomCard = ({room : {name, slug,images,price}}) => {
 }
 
 export default RoomCard
+
+// RoomCard.propTypes = {
+// name: PropTypes.string.isRequired,
+// slug: PropTypes.string.isRequired,
+// image: PropTypes.arrayOf(PropTypes.string).isRequired,
+// price: PropTypes.number.isRequired,
+// }

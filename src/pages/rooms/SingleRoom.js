@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Hero } from '../../components'
 
-const SingleRoom = () => {
+const SingleRoom = (props) => {
+  useEffect(() => {
+    
+    console.log(props)
+},[props])
   return (
     <Hero heroClass='roomsHero'></Hero>
   )

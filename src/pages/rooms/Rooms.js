@@ -11,7 +11,8 @@ import { images } from "../../assets";
 import RoomContext from "../../context/rooms/roomContext";
 
 const Rooms = () => {
-  const { loading, rooms, sortedRooms } = useContext(RoomContext);
+  const context = useContext(RoomContext);
+  // console.log(context)
   return (
     <>
       <Hero heroClass="roomsHero" bgImg={images.img12}>
@@ -22,8 +23,8 @@ const Rooms = () => {
         </HeroBanner>
       </Hero>
       <section>
-        <RoomFilter rooms={rooms} />
-        {loading ? <Loading /> : <RoomsList rooms={sortedRooms} />}
+        <RoomFilter context={context} />
+        {context.loading ? <Loading /> : <RoomsList rooms={context.sortedRooms} />}
       </section>
     </>
   );

@@ -8,6 +8,16 @@ const RoomProvider = ({ children }) => {
     sortedRooms: [],
     featuredRooms: [],
     loading: true,
+    // type: "double",
+    type: "all",
+    capacity: 1,
+    price: 0,
+    minPrice: 0,
+    maxPrice: 0,
+    minSize: 0,
+    maxSize: 0,
+    pets: false,
+    breakfast: false,
   });
 
   const formatData = (items) => {
@@ -27,12 +37,19 @@ const RoomProvider = ({ children }) => {
     let rooms = formatData(items);
     let featurRooms = rooms.filter((room) => room.featured === true);
 
+    let maxPrice = Math.max(...rooms.map((room) => room.price));
+    let maxSize = Math.max(...rooms.map((room) => room.size));
     setState({
-      rooms: rooms,
-      sortedRooms: rooms,
-      featuredRooms: featurRooms,
-      loading: false,
+        ...state,
+        rooms: rooms,
+        sortedRooms: rooms,
+        featuredRooms: featurRooms,
+        loading: false,
+        price: maxPrice,
+        maxPrice: maxPrice,
+        maxSize: maxSize,
     });
+    // eslint-disable-next-line
   }, []);
 
   const getRoom = (slug) => {
@@ -44,8 +61,37 @@ const RoomProvider = ({ children }) => {
     return room;
   };
 
+  const handleChange = (event) => {
+    const target = event.target;
+    const value = event.type === "checkbox" ? target.checked : target.value;
+    const name = event.target.name;
+    setState(
+      {
+        ...state,
+        [name]: value,
+      },
+      filterRooms()
+    );
+  };
+
+  const filterRooms = () => {
+    let {rooms, type} = state
+
+    let tempRooms = [...rooms]
+    // console.log(tempRooms)
+    if(type !== "all"){
+        tempRooms = tempRooms.filter(room => room.type=== type)
+    }
+    console.log(tempRooms)
+    
+    setState({
+        ...state,
+        sortedRooms: tempRooms
+    })
+    // console.log(state.sortedRooms)
+  };
   return (
-    <RoomContext.Provider value={{ ...state, getRoom }}>
+    <RoomContext.Provider value={{ ...state, getRoom, handleChange }}>
       {children}
     </RoomContext.Provider>
   );

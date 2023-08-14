@@ -8,14 +8,18 @@ const uniqueValue = (items, value) => {
 };
 
 const RoomFilter = ({ context }) => {
-  const { rooms, type, handleChange } = context;
+  const { rooms, type, handleChange, capacity } = context;
 
   // const t = useContext(RoomContext)
   // console.log(type)
   // console.log(context)
 
+
+
   let types = uniqueValue(rooms, "type");
   types = ["all", ...types];
+
+  let guest = uniqueValue(rooms, 'capacity')
   return (
     <div className="room__filter">
       <SectionTilte title="Search rooms" />
@@ -31,6 +35,23 @@ const RoomFilter = ({ context }) => {
             onChange={handleChange}
           >
             {types.map((item, i) => (
+              <option value={item} key={i}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div> 
+        {/* select guest */}
+        <div className="form-group">
+          <label htmlFor="capacity"> guest</label>
+          <select
+            name="capacity"
+            id="capacity"
+            value={capacity}
+            className="form-control"
+            onChange={handleChange}
+          >
+            {guest.map((item, i) => (
               <option value={item} key={i}>
                 {item}
               </option>

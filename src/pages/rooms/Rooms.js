@@ -12,7 +12,7 @@ import RoomContext from "../../context/rooms/roomContext";
 
 const Rooms = () => {
   const context = useContext(RoomContext);
-  // console.log(context)
+  // console.log(context.sortedRooms)
   return (
     <>
       <Hero heroClass="roomsHero" bgImg={images.img12}>

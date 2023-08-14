@@ -8,7 +8,6 @@ const RoomProvider = ({ children }) => {
     sortedRooms: [],
     featuredRooms: [],
     loading: true,
-    // type: "double",
     type: "all",
     capacity: 1,
     price: 0,
@@ -39,17 +38,16 @@ const RoomProvider = ({ children }) => {
 
     let maxPrice = Math.max(...rooms.map((room) => room.price));
     let maxSize = Math.max(...rooms.map((room) => room.size));
-    setState({
-        ...state,
-        rooms: rooms,
-        sortedRooms: rooms,
-        featuredRooms: featurRooms,
-        loading: false,
-        price: maxPrice,
-        maxPrice: maxPrice,
-        maxSize: maxSize,
-    });
-    // eslint-disable-next-line
+    setState((state) => ({
+      ...state,
+      rooms: rooms,
+      sortedRooms: rooms,
+      featuredRooms: featurRooms,
+      loading: false,
+      price: maxPrice,
+      maxPrice: maxPrice,
+      maxSize: maxSize,
+    }));
   }, []);
 
   const getRoom = (slug) => {
@@ -65,31 +63,43 @@ const RoomProvider = ({ children }) => {
     const target = event.target;
     const value = event.type === "checkbox" ? target.checked : target.value;
     const name = event.target.name;
-    setState(
-      {
-        ...state,
-        [name]: value,
-      },
-      filterRooms()
-    );
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const filterRooms = () => {
-    let {rooms, type} = state
+    let { rooms, type, capacity } = state;
 
-    let tempRooms = [...rooms]
-    // console.log(tempRooms)
-    if(type !== "all"){
-        tempRooms = tempRooms.filter(room => room.type=== type)
+    let tempRooms = [...rooms];
+
+    //
+    capacity = parseInt(capacity);
+
+    // filtering the rooms by types
+    if (type !== "all") {
+      tempRooms = tempRooms.filter((room) => room.type === type);
     }
-    console.log(tempRooms)
-    
-    setState({
-        ...state,
-        sortedRooms: tempRooms
-    })
-    // console.log(state.sortedRooms)
+
+    // filtering the rooms by capacity
+
+    if (capacity !== 1) {
+      tempRooms = tempRooms.filter((room) => room.capacity >= capacity);
+    }
+    return tempRooms;
   };
+
+  useEffect(() => {
+    // Call filterRooms and update sortedRooms when dependencies change
+    const filteredRooms = filterRooms();
+    setState((prevState) => ({
+      ...prevState,
+      sortedRooms: filteredRooms,
+    }));
+    // eslint-disable-next-line
+  }, [state.type, state.capacity, state.rooms]);
+
   return (
     <RoomContext.Provider value={{ ...state, getRoom, handleChange }}>
       {children}

@@ -61,7 +61,7 @@ const RoomProvider = ({ children }) => {
 
   const handleChange = (event) => {
     const target = event.target;
-    const value = event.type === "checkbox" ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = event.target.name;
     setState((prevState) => ({
       ...prevState,
@@ -70,12 +70,13 @@ const RoomProvider = ({ children }) => {
   };
 
   const filterRooms = () => {
-    let { rooms, type, capacity } = state;
+    let { rooms, type, capacity , price, minSize, maxSize, breakfast, pets } = state;
 
     let tempRooms = [...rooms];
 
-    //
+    //transforming values
     capacity = parseInt(capacity);
+    price = parseInt(price);
 
     // filtering the rooms by types
     if (type !== "all") {
@@ -83,10 +84,26 @@ const RoomProvider = ({ children }) => {
     }
 
     // filtering the rooms by capacity
-
     if (capacity !== 1) {
       tempRooms = tempRooms.filter((room) => room.capacity >= capacity);
     }
+
+    // flitering the rooms  by price
+    tempRooms = tempRooms.filter(room => room.price <= price) 
+    
+    // flitering the rooms  by room size
+    tempRooms = tempRooms.filter(room => room.size >= minSize && room.size <= maxSize)
+    
+    // flitering the rooms  by breakfast
+    if(breakfast){
+      tempRooms = tempRooms.filter(room => room.breakfast === true)
+    }
+    
+     // flitering the rooms  by breakfast
+     if(pets){
+      tempRooms = tempRooms.filter(room => room.pets === true)
+    }
+
     return tempRooms;
   };
 
@@ -98,7 +115,7 @@ const RoomProvider = ({ children }) => {
       sortedRooms: filteredRooms,
     }));
     // eslint-disable-next-line
-  }, [state.type, state.capacity, state.rooms]);
+  }, [state.type, state.capacity, state.rooms, state.price, state.minSize, state.maxSize, state.breakfast, state.pets]);
 
   return (
     <RoomContext.Provider value={{ ...state, getRoom, handleChange }}>

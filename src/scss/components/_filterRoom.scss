@@ -17,7 +17,7 @@
 
             & label {
                 display: block;
-                letter-spacing: var(--mainSpacing);
+                letter-spacing: $mainSpacing;
                 margin-bottom: 0.5rem;
             }
 
@@ -26,6 +26,30 @@
                 background: transparent;
                 font-size: 1rem;
             }
+
+            & .size-inputs {
+                display: flex;
+
+                & .size-input {
+                    width: 40%;
+                    padding: 0.2rem;
+                    border: 1px solid $mainBlack;
+                    border-radius: 0.3rem;
+                    margin-right: 0.3rem;
+                }
+            }
+
+            & .single-extras {
+                // display: flex;
+                // align-items: center;
+
+                & label {
+                    display: inline-block;
+                    font-size: 0.8rem;
+                    margin-left: 0.5rem;
+                }
+            }
+
         }
     }
 }
@@ -33,31 +57,18 @@
 
 
 
-.size-inputs {
-    display: flex;
-}
 
-.size-input {
-    width: 40%;
-    padding: 0.2rem;
-    border: 1px solid var(--mainBlack);
-    border-radius: 0.3rem;
-    margin-right: 0.3rem;
-}
 
-.single-extra label {
-    display: inline-block;
-    font-size: 0.8rem;
-    margin-left: 0.5rem;
-}
 
-@media screen and (min-width: 776px) {
+
+
+@include lg-mobile {
     .room__filter-form {
         width: 70vw;
     }
 }
 
-@media screen and (min-width: 992px) {
+@include medium-screen {
     .room__filter-form {
         width: 95vw;
         max-width: 1170px;

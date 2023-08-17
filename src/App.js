@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import "./scss/main.scss";
+import { ErrorPage, Home, Rooms, SingleRoom } from "./pages";
+import { Navbar } from "./components";
 
 function App() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/rooms" element={<Rooms />} />
+        <Route path="/rooms/:slug" element={<SingleRoom />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </>
   );
 }
 

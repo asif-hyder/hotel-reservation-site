@@ -41,7 +41,11 @@ const RoomProvider = ({ children }) => {
   const getData = async () =>{
     try {
       let res = await Client.getEntries({
-        content_type: "beachResortRooms"
+        content_type: "beachResortRooms",
+        // ordering by createdAt
+        // order: "sys.createdAt",
+        // ordering by price
+        order: "fields.price"
       })
       // console.log(res.items)
   

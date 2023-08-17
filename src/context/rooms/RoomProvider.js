@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import RoomContext from "./roomContext";
-import items from "../../data";
+
+// geting data localyy
+// import items from "../../data";
+
+// geting data from contentfull
+import Client from "../../services/contentfulApi"
+
 
 const RoomProvider = ({ children }) => {
   const [state, setState] = useState({
@@ -32,22 +38,35 @@ const RoomProvider = ({ children }) => {
     return tempData;
   };
 
+  const getData = async () =>{
+    try {
+      let res = await Client.getEntries({
+        content_type: "beachResortRooms"
+      })
+      // console.log(res.items)
+  
+      let rooms = formatData(res.items);
+      let featurRooms = rooms.filter((room) => room.featured === true);
+  
+      let maxPrice = Math.max(...rooms.map((room) => room.price));
+      let maxSize = Math.max(...rooms.map((room) => room.size));
+      setState((state) => ({
+        ...state,
+        rooms: rooms,
+        sortedRooms: rooms,
+        featuredRooms: featurRooms,
+        loading: false,
+        price: maxPrice,
+        maxPrice: maxPrice,
+        maxSize: maxSize,
+      }));
+    } catch (error) {
+      console.log(error)
+    }
+  }
   useEffect(() => {
-    let rooms = formatData(items);
-    let featurRooms = rooms.filter((room) => room.featured === true);
-
-    let maxPrice = Math.max(...rooms.map((room) => room.price));
-    let maxSize = Math.max(...rooms.map((room) => room.size));
-    setState((state) => ({
-      ...state,
-      rooms: rooms,
-      sortedRooms: rooms,
-      featuredRooms: featurRooms,
-      loading: false,
-      price: maxPrice,
-      maxPrice: maxPrice,
-      maxSize: maxSize,
-    }));
+    getData()
+    // eslint-disable-next-line
   }, []);
 
   const getRoom = (slug) => {
